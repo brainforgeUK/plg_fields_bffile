@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<extension type="plugin" version="3.7.0" group="fields" method="upgrade">
+	<name>plg_fields_bffile</name>
+	<author>Jonathan Brain</author>
+	<creationDate>February 2018</creationDate>
+	<copyright>Copyright (C) 2018 Jonathan Brain. All rights reserved.</copyright>
+	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
+	<authorEmail>brainforge.uk@btinternet.com</authorEmail>
+	<authorUrl>http://www.brainforge.co.uk</authorUrl>
+	<version>3.7.0</version>
+	<description>PLG_FIELDS_BFFILE_XML_DESCRIPTION</description>
+	<files>
+		<filename plugin="bffile">bffile.php</filename>
+		<folder>fields</folder>
+		<folder>layouts</folder>
+		<folder>params</folder>
+		<folder>tmpl</folder>
+	</files>
+
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.plg_fields_bffile.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.plg_fields_bffile.sys.ini</language>
+	</languages>
+
+	<scriptfile>install.bffile.php</scriptfile>
+
+	<config>
+		<fields name="params">
+			<fieldset name="basic">
+			<field
+				name="bffile_download_class"
+				type="textarea"
+				label="PLG_FIELDS_BFFILE_PARAMS_DOWNLOAD_CLASS_LABEL"
+				description="PLG_FIELDS_BFFILE_PARAMS_DOWNLOAD_CLASS_DESC"
+				size="40"
+			/>
+			</fieldset>
+		</fields>
+	</config>
+</extension>
