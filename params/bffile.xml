@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
 	<fields name="fieldparams">
-		<fieldset name="overrides" label="PLG_FIELDS_BFFILE_OVERRIDES_FIELDSET_LABEL" description="PLG_FIELDS_BFFILE_PARAMS_OVERRIDE">
+		<fieldset name="fieldparams" label="PLG_FIELDS_BFFILE_OVERRIDES_FIELDSET_LABEL" description="PLG_FIELDS_BFFILE_PARAMS_OVERRIDE">
+
  			<field
 				name="bffile_download_class"
 				type="textarea"
