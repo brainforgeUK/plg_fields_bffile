@@ -196,25 +196,33 @@ class JFormFieldBffile extends JFormField
 	 */
 	protected function getOptions()
 	{
-		$options = array();
-		return $options;
+		return array();
+	}
 
-		foreach ($this->element->children() as $option)
-		{
-			// Only add <option /> elements.
-			if ($option->getName() != 'option')
-			{
-				continue;
-			}
-
-			// Create a new option object based on the <option /> element.
-			$options[] = JHtml::_(
-				'select.option', (string) $option['value'],
-				JText::alt(trim((string) $option), preg_replace('/[^a-zA-Z0-9_\-]/', '_', $this->fieldname)), 'value', 'text'
-			);
-		}
-
-		return $options;
+	/**
+	 * Method to get the field parameter value.
+	 *
+	 * @since   3.4
+	 */
+	public function getParam($name, $default=null)
+	{
+    foreach($this->element->attributes() as $id => $value) {
+      if ($name == $id) {
+        switch($name) {
+          case 'bffile_suffix_list':
+            $value = preg_replace('/^[^a-zA-Z0-9]+/', '', $value);
+            $value = preg_replace('/[^a-zA-Z0-9]+$/', '', $value);
+            if (!empty($value)) {
+              $value = preg_split('/[^a-zA-Z0-9]+/', $value);
+            }
+            break;
+          case 'label':
+            return $value->__toString();
+        }
+        return $value;
+      }
+    }
+    return $default;
 	}
 
 	/**

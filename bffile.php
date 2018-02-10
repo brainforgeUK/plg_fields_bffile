@@ -47,6 +47,7 @@ class PlgFieldsBffile extends FieldsPlugin
 	 * @return  void
 	 */
   public function onUserBeforeDataValidation($form, &$data) {
+    $bffileIDs = array();  
     if (is_array($_FILES['jform']['name']['com_fields'])) {
       foreach($_FILES['jform']['name']['com_fields'] as $id=>$fileName) {
         if (!empty($_FILES['jform']['tmp_name']['com_fields'][$id]) && @file_exists($_FILES['jform']['tmp_name']['com_fields'][$id])) {
@@ -58,17 +59,43 @@ class PlgFieldsBffile extends FieldsPlugin
             $data['com_fields'] = array();
           }
           $data['com_fields'][$id] = json_encode($field);
+          $bffileIDs[] = $id;
         }
       }
     }
 
-    if (is_array($data['com_fields']['original'])) {
-      foreach($data['com_fields']['original'] as $id => $field) {
+    if (is_array($data['com_fields']['bffile-original'])) {
+      foreach($data['com_fields']['bffile-original'] as $id => $field) {
         if (empty($data['com_fields'][$id])) {
           $data['com_fields'][$id] = str_replace('&#34;', '"', $field);
         }
       }
-      unset($data['com_fields']['original']);
+      unset($data['com_fields']['bffile-original']);
+      $bffileIDs[] = $id;
+    }
+
+    foreach($form->getFieldSets() as $setName=>$set) {
+      if (strpos($setName, 'fields-') === 0) {
+        $setFields = $form->getFieldSet($setName);
+        foreach (array_unique($bffileIDs) as $id) {
+          $formfieldid = 'jform_com_fields_' . $id;
+          if (isset($setFields[$formfieldid])) {
+            $field = $setFields[$formfieldid];
+            $suffix_list = $field->getParam('bffile_suffix_list');
+            if (!empty($suffix_list) && !empty($data['com_fields'][$id])) {
+              $valueObject = json_decode($data['com_fields'][$id]);
+              if (empty($valueObject)) {
+                $data['com_fields'][$id] = null;
+                JFactory::getApplication()->enqueueMessage(JText::sprintf('PLG_FIELDS_BFFILE_DATA_ALERT', $field->getParam('label'), jText::_('PLG_FIELDS_BFFILE_DATA_CORRUPT')));
+              }
+              else if (!in_array(pathinfo($valueObject->filename, PATHINFO_EXTENSION), $suffix_list)) {
+                $data['com_fields'][$id] = null;
+                JFactory::getApplication()->enqueueMessage(jText::sprintf('PLG_FIELDS_BFFILE_SUFFIX_UNSUPPORTED', $field->getParam('label'), $valueObject->filename), 'error');
+              }
+            }
+          }
+        }
+      }
     }
   }
 

@@ -9,11 +9,15 @@
 
 defined('JPATH_BASE') or die;
 
-if (!JFactory::getApplication()->isAdmin()) {
-  JFactory::getApplication()->enqueueMessage(JText::_('JERROR_LOGIN_DENIED'), 'error');
+$application = JFactory::getApplication();
+if (!$application->isAdmin()) {
+  $application->enqueueMessage(JText::_('JERROR_LOGIN_DENIED'), 'error');
 }
 else {
+  $suffix_list = $displayData['field']->getParam('bffile_suffix_list');
+
   extract($displayData);
+
   /**
    * Layout variables
    * -----------------
@@ -65,6 +69,15 @@ else {
              jText::_('PLG_FIELDS_BFFILE_XML_DESCRIPTION') .
            '</p>';  
     }
+  }
+  if (!empty($valueObject)) {
+    if (!empty($suffix_list) && !in_array(pathinfo($valueObject->filename, PATHINFO_EXTENSION), $suffix_list)) {
+      $application->enqueueMessage(jText::sprintf('PLG_FIELDS_BFFILE_SUFFIX_UNSUPPORTED', $label, $valueObject->filename), 'error');
+      $required = true;
+      $valueEmpty = true;
+      $value = null;
+      $valueObject = null;
+    }
     else {
       echo $valueObject->filename . '<br/>';
     }
@@ -79,23 +92,14 @@ else {
   	<?php echo !empty($multiple) ? ' multiple' : ''; ?>
   	<?php echo $disabled ? ' disabled' : ''; ?>
   	<?php echo $autofocus ? ' autofocus' : ''; ?>
+    <?php echo !empty($suffix_list) ? 'accept=".' . implode(',.', $suffix_list) . '"' : ''; ?>
   	<?php echo !empty($onchange) ? ' onchange="' . $onchange . '"' : ''; ?>
   	<?php echo $required ? ' required aria-required="true"' : ''; ?> /><br/>
   	<?php echo JText::sprintf('JGLOBAL_MAXIMUM_UPLOAD_SIZE_LIMIT', $maxSize); ?>
 
   <input type="hidden"
-  	name="<?php echo str_replace('[com_fields]', '[com_fields][original]', $name); ?>"
+  	name="<?php echo str_replace('[com_fields]', '[com_fields][bffile-original]', $name); ?>"
   	value="<?php echo str_replace('"', '&#34;', $value); ?>" />
   <?php
-/*  
-  print_r(strlen($value));
-  exit(0);
-  echo '<pre>';
-  print_r($value);
-  echo '</pre>';
-  $value = sscanf($value, '{"filename":"%[^"]","size":%d,"data":"%[^"]');
-//  $value = json_decode($value);
-//  echo $value['filename'] . ' (' . $value['size'] . ')';
-*/
 }
 ?>
