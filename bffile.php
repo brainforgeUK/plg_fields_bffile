@@ -143,18 +143,4 @@ class PlgFieldsBffile extends FieldsPlugin
 
 		return parent::onContentPrepareForm($form, $data);
 	}
-  
-	/**
-	 * Returns the custom fields types.
-	 *
-	 * @return  string[][]
-	 *
-	 * @since   3.7.0
-	 */
-	public function onCustomFieldsGetTypes() {
-    return array('bffile' => array('type' => 'bffile',
-                                   'label' => 'Brainforge File',
-                                   'path' => __DIR__ . '/fields',
-                                   'rules' => null));
-  }
 }
