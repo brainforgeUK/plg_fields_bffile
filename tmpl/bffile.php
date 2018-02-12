@@ -19,6 +19,12 @@ if (empty($valueObject)) {
   return;  
 }
 
+$suffix_list = $fieldParams->get('bffile_suffix_list');
+$suffix_list = PlgFieldsBffile::paramValueToArray($suffix_list);
+if (!PlgFieldsBffile::filenameInSuffixArray($valueObject->filename, $suffix_list)) {
+  return;
+}
+
 $browserNav = $fieldParams->get('bffile_browserNav');
 
 if (JFactory::getApplication()->input->get('bffile', '', 'raw') != $valueObject->filename) {

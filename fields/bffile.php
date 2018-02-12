@@ -210,14 +210,12 @@ class JFormFieldBffile extends JFormField
       if ($name == $id) {
         switch($name) {
           case 'bffile_suffix_list':
-            $value = preg_replace('/^[^a-zA-Z0-9]+/', '', $value);
-            $value = preg_replace('/[^a-zA-Z0-9]+$/', '', $value);
-            if (!empty($value)) {
-              $value = preg_split('/[^a-zA-Z0-9]+/', $value);
-            }
-            break;
+            $value = PlgFieldsBffile::paramValueToArray($value);
           case 'label':
-            return $value->__toString();
+            $value = $value->__toString();
+        }
+        if (empty($value)) {
+          return $default;
         }
         return $value;
       }

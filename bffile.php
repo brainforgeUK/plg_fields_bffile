@@ -88,7 +88,7 @@ class PlgFieldsBffile extends FieldsPlugin
                 $data['com_fields'][$id] = null;
                 JFactory::getApplication()->enqueueMessage(JText::sprintf('PLG_FIELDS_BFFILE_DATA_ALERT', $field->getParam('label'), jText::_('PLG_FIELDS_BFFILE_DATA_CORRUPT')));
               }
-              else if (!in_array(pathinfo($valueObject->filename, PATHINFO_EXTENSION), $suffix_list)) {
+              else if (!self::filenameInSuffixArray($valueObject->filename, $suffix_list)) {
                 $data['com_fields'][$id] = null;
                 JFactory::getApplication()->enqueueMessage(jText::sprintf('PLG_FIELDS_BFFILE_SUFFIX_UNSUPPORTED', $field->getParam('label'), $valueObject->filename), 'error');
               }
@@ -143,4 +143,25 @@ class PlgFieldsBffile extends FieldsPlugin
 
 		return parent::onContentPrepareForm($form, $data);
 	}
+
+  /**
+   */
+  public static function paramValueToArray($value) {
+    $value = preg_replace('/^[^a-z0-9]+/', '', strtolower($value));
+    $value = preg_replace('/[^a-z0-9]+$/', '', $value);
+    if (empty($value)) {
+      return $value;
+    }
+    return preg_split('/[^a-z0-9]+/', $value);
+  }
+
+
+  /**
+   */
+  public static function filenameInSuffixArray($filename, $suffices) {
+    if (empty($suffices)) {
+      return true;
+    }
+    return in_array(strtolower(pathinfo($valueObject->filename, PATHINFO_EXTENSION)), $suffices);
+  }
 }

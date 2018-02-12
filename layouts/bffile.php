@@ -71,7 +71,7 @@ else {
     }
   }
   if (!empty($valueObject)) {
-    if (!empty($suffix_list) && !in_array(pathinfo($valueObject->filename, PATHINFO_EXTENSION), $suffix_list)) {
+    if (!PlgFieldsBffile::filenameInSuffixArray($valueObject->filename, $suffix_list)) {
       $application->enqueueMessage(jText::sprintf('PLG_FIELDS_BFFILE_SUFFIX_UNSUPPORTED', $label, $valueObject->filename), 'error');
       $required = true;
       $valueEmpty = true;
