@@ -162,6 +162,6 @@ class PlgFieldsBffile extends FieldsPlugin
     if (empty($suffices)) {
       return true;
     }
-    return in_array(strtolower(pathinfo($valueObject->filename, PATHINFO_EXTENSION)), $suffices);
+    return in_array(strtolower(pathinfo($filename, PATHINFO_EXTENSION)), $suffices);
   }
 }

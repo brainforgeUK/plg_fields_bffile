@@ -6,7 +6,7 @@
  			<field
 				name="bffile_download_class"
 				type="textarea"
-				label="PLG_FIELDS_BFFILE_PARAMS_DOWNLOAD_CLASS_LABEL"
+				label="PLG_FIELDS_BFFILE_OPTIONS_DOWNLOAD_CLASS_LABEL"
 				description="PLG_FIELDS_BFFILE_PARAMS_DOWNLOAD_CLASS_DESC"
 				size="40"
 			/>
@@ -14,7 +14,7 @@
 			<field
 				name="bffile_suffix_list"
 				type="textarea"
-				label="PLG_FIELDS_BFFILE_PARAMS_SUFFIX_LIST_LABEL"
+				label="PLG_FIELDS_BFFILE_OPTIONS_SUFFIX_LIST_LABEL"
 				description="PLG_FIELDS_BFFILE_PARAMS_SUFFIX_LIST_DESC"
 				size="40"
 			/>
@@ -22,15 +22,15 @@
   		<field
   			name="bffile_browserNav"
   			type="list"
-  			label="PLG_FIELDS_BFFILE_PARAMS_BROWSERNAV_LABEL"
+  			label="PLG_FIELDS_BFFILE_OPTIONS_BROWSERNAV_LABEL"
   			description="PLG_FIELDS_BFFILE_PARAMS_BROWSERNAV_DESC"
   			default=""
   			>
   			<option value="">PLG_FIELDS_BFFILE_PARAMS_BROWSERNAV_INHERIT</option>
-  			<option value="0">PLG_FIELDS_BFFILE_PARAMS_BROWSERNAV_AUTOMATIC</option>
-  			<option value="1">PLG_FIELDS_BFFILE_PARAMS_BROWSERNAV_DOWNLOAD</option>
-  			<option value="2">PLG_FIELDS_BFFILE_PARAMS_BROWSERNAV_PARENT</option>
-  			<option value="3">PLG_FIELDS_BFFILE_PARAMS_BROWSERNAV_NEW</option>
+  			<option value="0">PLG_FIELDS_BFFILE_OPTIONS_BROWSERNAV_AUTOMATIC</option>
+  			<option value="1">PLG_FIELDS_BFFILE_OPTIONS_BROWSERNAV_DOWNLOAD</option>
+  			<option value="2">PLG_FIELDS_BFFILE_OPTIONS_BROWSERNAV_PARENT</option>
+  			<option value="3">PLG_FIELDS_BFFILE_OPTIONS_BROWSERNAV_NEW</option>
   		</field>
 		</fieldset>
 	</fields>

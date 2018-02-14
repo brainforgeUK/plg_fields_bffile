@@ -211,6 +211,7 @@ class JFormFieldBffile extends JFormField
         switch($name) {
           case 'bffile_suffix_list':
             $value = PlgFieldsBffile::paramValueToArray($value);
+            break;
           case 'label':
             $value = $value->__toString();
         }
