@@ -60,6 +60,6 @@
 	</config>
 
 	<updateservers>
-		<server type="extension" priority="1" name="Fields - file by BrainforgeUK">https://brainforge.co.uk/media/com_bfupdater/plg_fields_file.xml</server>
+		<server type="extension" priority="1" name="Fields - file by BrainforgeUK">https://brainforge.co.uk/media/com_bfupdater/plg_fields_bffile.xml</server>
 	</updateservers>
 </extension>
