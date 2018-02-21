@@ -7,7 +7,7 @@
 	<license>GNU General Public License version 2 or later; see LICENSE.txt</license>
 	<authorEmail>brainforge.uk@btinternet.com</authorEmail>
 	<authorUrl>http://www.brainforge.co.uk</authorUrl>
-	<version>3.7.0</version>
+	<version>3.7.1</version>
 	<description>PLG_FIELDS_BFFILE_XML_DESCRIPTION</description>
 	<files>
 		<filename plugin="bffile">bffile.php</filename>
@@ -60,6 +60,8 @@
 	</config>
 
 	<updateservers>
-		<server type="extension" priority="1" name="Fields - file by BrainforgeUK">https://brainforge.co.uk/media/com_bfupdater/plg_fields_bffile.xml</server>
+		<server type="extension" priority="1" name="Fields - file by BrainforgeUK">
+			https://brainforge.co.uk/component/bfupdater?element=plg_fields_bffile.xml
+		</server>
 	</updateservers>
 </extension>
